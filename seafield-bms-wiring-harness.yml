@@ -152,7 +152,7 @@ connections:
   -
     - module2_rh: [3-9]
     - W3: [9-15]
-    - jkbalancer1_1: [B1, B3, B5, B7, B9, B11, B13] # , B2, B4, B6, B8, B10, B12, B14]
+    - jkbalancer1_1: [B1, B3, B5, B7, B9, B11, B13]
   -
     - module2_lh: [8-10,12-15]
     - W3: [2-8]
