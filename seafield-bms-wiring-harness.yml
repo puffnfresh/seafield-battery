@@ -53,44 +53,98 @@ cables:
       - RD
       - RD
     wirecount: 11
-  W5:
-    <<: *w15
-  W6:
-    <<: *w11
-  W7:
-    <<: *w15
-  W8:
-    <<: *w11
-  W9:
-    <<: *w15
-  W10:
-    <<: *w11
+  LH1: &lh
+    gauge: 22 AWG
+    show_equiv: true
+    length: 0.05
+    colors:
+      - BU
+      - BK
+      - VT
+      - BN
+      - SR
+      - RD
+    wirecount: 6
+  RH1: &rh
+    gauge: 22 AWG
+    show_equiv: true
+    length: 0.05
+    colors:
+      - BK
+      - GN
+      - BN
+      - BU
+      - RD
+    wirecount: 5
+  LH2:
+    <<: *lh
+  RH2:
+    <<: *rh
+  LH3:
+    <<: *lh
+  RH3:
+    <<: *rh
+  LH4:
+    <<: *lh
+  RH4:
+    <<: *rh
+  LH5:
+    <<: *lh
+  RH5:
+    <<: *rh
 
 connectors:
   module1_lh: &module_lh
     pincount: 20
-    type: Dupont 2.54mm
+    type: ERNI MaxiBridge 2.54mm
     subtype: female
   module1_rh: &module_rh
     pincount: 10
-    type: Dupont 2.54mm
+    type: ERNI MaxiBridge 2.54mm
     subtype: female
+  module1_lh_adapter: &module_lh_adapter
+    pincount: 10
+    type: JST SM 2.54mm
+  module1_rh_adapter: &module_rh_adapter
+    pincount: 5
+    type: JST SM 2.54mm
+
   module2_lh:
     <<: *module_lh
   module2_rh:
     <<: *module_rh
+  module2_lh_adapter:
+    <<: *module_lh_adapter
+  module2_rh_adapter:
+    <<: *module_rh_adapter
+
   module3_lh:
     <<: *module_lh
   module3_rh:
     <<: *module_rh
+  module3_lh_adapter:
+    <<: *module_lh_adapter
+  module3_rh_adapter:
+    <<: *module_rh_adapter
+
   module4_lh:
     <<: *module_lh
   module4_rh:
     <<: *module_rh
+  module4_lh_adapter:
+    <<: *module_lh_adapter
+  module4_rh_adapter:
+    <<: *module_rh_adapter
+
   module5_lh:
     <<: *module_lh
   module5_rh:
     <<: *module_rh
+  module5_lh_adapter:
+    <<: *module_lh_adapter
+  module5_rh_adapter:
+    <<: *module_rh_adapter
+
   jkbms_1:
     type: XH2.54mm
     subtype: female
@@ -107,125 +161,123 @@ connectors:
     type: XH2.54mm
     subtype: female
     pinlabels: [B15, B16, B17, B18, B19, B20, B21, B22, B23, B24, B+]
-  jkbalancer2_1:
-    <<: *balancer1
-  jkbalancer2_2:
-    <<: *balancer2
-  jkbalancer3_1:
-    <<: *balancer1
-  jkbalancer3_2:
-    <<: *balancer2
-  jkbalancer4_1:
-    <<: *balancer1
-  jkbalancer4_2:
-    <<: *balancer2
 
 connections:
+  # Module 1
   -
-    - module1_lh: [5-10,12-13]
-    - W1: [1-8]
-    - jkbms_1: [B-, B2, B4, B6, B8, B10, B12, B14]
+    - module1_lh: [5-10]
+    - LH1: [1-6]
+    - module1_lh_adapter: [1-6]
   -
-    - module1_rh: [1-7]
-    - W1: [9-15]
-    - jkbms_1: [B1, B3, B5, B7, B9, B11, B13]
+    - module1_rh: [1-5]
+    - RH1: [1-5]
+    - module1_rh_adapter: [1-5]
+
   -
-    - module1_rh: [8-10]
+    - module1_lh_adapter: [1-6]
+    - W1: [1-6]
+    - jkbms_1: [B-, B2, B4, B6, B8, B10]
+  -
+    - module1_rh_adapter: [1-5]
+    - W1: [7-11]
+    - jkbms_1: [B1, B3, B5, B7, B9]
+
+  # Module 2
+  -
+    - module2_lh: [5-10]
+    - LH2: [1-6]
+    - module2_lh_adapter: [1-6]
+  -
+    - module2_rh: [1-5]
+    - RH2: [1-5]
+    - module2_rh_adapter: [1-5]
+
+  -
+    - module2_lh_adapter: [2-3]
+    - W1: [12-13]
+    - jkbms_1: [B12, B14]
+  -
+    - module2_rh_adapter: [1-2]
+    - W1: [14-15]
+    - jkbms_1: [B11, B13]
+  -
+    - module2_lh_adapter: [4-6]
     - W2: [1-3]
-    - jkbms_2: [B15, B17, B19]
-  -
-    - module1_lh: [14-16]
-    - W2: [4-6]
     - jkbms_2: [B16, B18, B20]
   -
-    - module2_rh: [1-3, 3]
-    - W2: [9-12]
-    - jkbms_2: [B21, B23, B25, B+]
+    - module2_rh_adapter: [3-5]
+    - W2: [4-6]
+    - jkbms_2: [B15, B17, B19]
+
+  # Module 3
   -
-    - module2_lh: [6-7]
+    - module3_lh: [5-10]
+    - LH3: [1-6]
+    - module3_lh_adapter: [1-6]
+  -
+    - module3_rh: [1-5]
+    - RH3: [1-5]
+    - module3_rh_adapter: [1-5]
+
+  -
+    - module3_lh_adapter: [2-3]
     - W2: [7-8]
     - jkbms_2: [B22, B24]
   -
-    - module2_lh: [7]
-    - W3: [1]
-    - jkbalancer1_1: [B-]
+    - module3_rh_adapter: [1-3, 3]
+    - W2: [9-12]
+    - jkbms_2: [B21, B23, B25, B+]
   -
-    - module2_rh: [3-9]
-    - W3: [9-15]
-    - jkbalancer1_1: [B1, B3, B5, B7, B9, B11, B13]
+    - module3_lh_adapter: [3-6]
+    - W3: [1-4]
+    - jkbalancer1_1: [B-, B2, B4, B6]
   -
-    - module2_lh: [8-10,12-15]
-    - W3: [2-8]
-    - jkbalancer1_1: [B2, B4, B6, B8, B10, B12, B14]
+    - module3_rh_adapter: [3-5]
+    - W3: [5-7]
+    - jkbalancer1_1: [B1, B3, B5]
+
+  # Module 4
   -
-    - module2_rh: [10]
+    - module4_lh: [5-10]
+    - LH4: [1-6]
+    - module4_lh_adapter: [1-6]
+  -
+    - module4_rh: [1-5]
+    - RH4: [1-5]
+    - module4_rh_adapter: [1-5]
+
+  -
+    - module4_lh_adapter: [2-5]
+    - W3: [8-11]
+    - jkbalancer1_1: [B7, B9, B11, B13]
+  -
+    - module4_rh_adapter: [1-4]
+    - W3: [12-15]
+    - jkbalancer1_1: [B8, B10, B12, B14]
+  -
+    - module4_lh_adapter: [6]
     - W4: [1]
     - jkbalancer1_2: [B15]
   -
-    - module2_lh: [16]
+    - module4_rh_adapter: [5]
     - W4: [2]
     - jkbalancer1_2: [B16]
+
+  # Module 5
   -
-    - module3_rh: [1-4]
+    - module5_lh: [5-10]
+    - LH5: [1-6]
+    - module5_lh_adapter: [1-6]
+  -
+    - module5_rh: [1-5]
+    - RH5: [1-5]
+    - module5_rh_adapter: [1-5]
+
+  -
+    - module5_lh_adapter: [2-5]
     - W4: [3-6]
     - jkbalancer1_2: [B17, B19, B21, B23]
   -
-    - module3_lh: [6-9, 9]
+    - module5_rh_adapter: [1-4, 4]
     - W4: [7-11]
     - jkbalancer1_2: [B18, B20, B22, B24, B+]
-  -
-    - module3_rh: [4-10]
-    - W5: [1-7]
-    - jkbalancer2_1: [B-, B2, B4, B6, B8, B10, B12]
-  -
-    - module3_lh: [9-10, 12-16]
-    - W5: [8-14]
-    - jkbalancer2_1: [B1, B3, B5, B7, B9, B11, B13]
-  -
-    - module4_rh: [1]
-    - W5: [15]
-    - jkbalancer2_1: [B14]
-  -
-    - module4_lh: [6-10]
-    - W6: [7-11]
-    - jkbalancer2_2: [B15, B17, B19, B21, B23]
-  -
-    - module4_rh: [2-6, 6]
-    - W6: [1-5, 6]
-    - jkbalancer2_2: [B16, B18, B20, B22, B24, B+]
-  -
-    - module4_lh: [10, 12-16]
-    - W7: [1-6]
-    - jkbalancer3_1: [B-, B2, B4, B6, B8, B10]
-  -
-    - module4_rh: [6-10]
-    - W7: [7-11]
-    - jkbalancer3_1: [B1, B3, B5, B7, B9]
-  -
-    - module5_lh: [6-7]
-    - W7: [12-13]
-    - jkbalancer3_1: [B11, B13]
-  -
-    - module5_rh: [1-2]
-    - W7: [14-15]
-    - jkbalancer3_1: [B12, B14]
-  -
-    - module5_lh: [8-12]
-    - W8: [1-5]
-    - jkbalancer3_2: [B15, B17, B19, B21, B23]
-  -
-    - module5_rh: [3-7, 7]
-    - W8: [6-11]
-    - jkbalancer3_2: [B16, B18, B20, B22, B24, B+]
-  -
-    - module5_lh: [12-16]
-    - W9: [1-5]
-    - jkbalancer4_1: [B-, B2, B4, B6, B8]
-  -
-    - module5_rh: [7-10]
-    - W9: [6-9]
-    - jkbalancer4_1: [B1, B3, B5, B7]
-  -
-    - module5_lh: [16]
-    - W10: [11]
-    - jkbalancer4_2: [B+]
